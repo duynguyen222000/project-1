@@ -11,7 +11,7 @@ import pic2 from "../../assets/img/2.png";
 export const CarouselMDB = () => {
   return (
     <>
-      <MDBCarousel showControls={false} interval={3000} pause={true} fade>
+      <MDBCarousel showControls={false} interval={2000} pause="true" fade>
         <MDBCarouselInner>
           <MDBCarouselItem className="active">
             <MDBCarouselElement src={slide} alt="..." />

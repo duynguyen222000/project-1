@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./header.scss";
 import {
   MDBNavbar,
@@ -17,7 +17,16 @@ import { NavLink, Link } from "react-router-dom";
 import logo from "../../assets/img/logo.png";
 export const Header = () => {
   const [showNavNoTogglerSecond, setShowNavNoTogglerSecond] = useState(false);
-
+  const [clearToken, setClearToken] = useState(false);
+  const handleClearToken = () => {
+    console.log("1");
+    clearTokenFunc();
+    setClearToken(!clearToken);
+  };
+  const clearTokenFunc = () => {
+    console.log("2");
+    localStorage.clear();
+  };
   return (
     <>
       <MDBNavbar expand="lg" light bgColor="light">
@@ -80,7 +89,7 @@ export const Header = () => {
                 </MDBNavbarLink>
               </MDBNavbarItem>
             </MDBNavbarNav>
-            <MDBInputGroup tag="form" className="d-flex w-auto mb-3">
+            <MDBInputGroup tag="form" className="d-flex  mb-3">
               <input
                 className="form-control"
                 placeholder="Enter your text"
@@ -88,7 +97,28 @@ export const Header = () => {
                 type="Search"
               />
               <MDBBtn outline>Search</MDBBtn>
-            </MDBInputGroup>{" "}
+            </MDBInputGroup>
+            <div className="btn-group ms-2 mb-3">
+              {!localStorage.getItem("access_token") ? (
+                <Link to="login" className="btn btn-outline-primary">
+                  Login
+                </Link>
+              ) : (
+                <button
+                  onClick={() => {
+                    handleClearToken();
+                  }}
+                  className="btn btn-primary"
+                >
+                  LogOut
+                </button>
+              )}
+            </div>{" "}
+            <img
+              // style={{ width: "30px" }}
+              src={localStorage.getItem("avatar")}
+              alt=""
+            />
           </MDBCollapse>
         </MDBContainer>
       </MDBNavbar>

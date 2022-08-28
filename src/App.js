@@ -7,6 +7,7 @@ import { About } from "./pages/About/About";
 import { Product } from "./pages/Product/Product";
 import { AdminTemplate } from "./templates/Admin/AdminTemplate";
 import { LoginFrom } from "./pages/Login/LoginForm";
+import { Detail } from "./pages/DetailProduct/Detail";
 function App() {
   return (
     <div className="App">
@@ -17,9 +18,10 @@ function App() {
             <Route path="home" element={<Home />} />
             <Route path="about" element={<About />} />
             <Route path="product" element={<Product />} />
+            <Route path="detail" element={<Detail />} />
             <Route path="*" element={<NotFound />} />
           </Route>
-          <Route path="/admin" element={<AdminTemplate />}></Route>
+          <Route path="admin" element={<AdminTemplate />}></Route>
           <Route path="/login" element={<LoginFrom />} />
         </Routes>
       </Router>

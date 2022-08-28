@@ -7,7 +7,6 @@ export const HomeTemplate = () => {
   return (
     <div className="HomeTemPlate">
       <Header />
-
       <Outlet />
       <Footer />
     </div>

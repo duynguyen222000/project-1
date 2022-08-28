@@ -9,6 +9,15 @@ export const Home = () => {
       <CarouselMDB />
       <MDBContainer className="mt-4">
         <MDBRow>
+          <MDBCol className="mb-4" md="4">
+            <CardProduct />
+          </MDBCol>
+          <MDBCol md="4">
+            <CardProduct />
+          </MDBCol>
+          <MDBCol md="4">
+            <CardProduct />
+          </MDBCol>
           <MDBCol md="4">
             <CardProduct />
           </MDBCol>
