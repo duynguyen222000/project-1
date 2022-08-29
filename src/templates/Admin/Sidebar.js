@@ -19,6 +19,7 @@ import {
 } from "react-icons/fa";
 import sidebarBg from "../../assets/img/2.png";
 import "./Sidebar.scss";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = ({ image, toggled, handleToggleSidebar }) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -46,10 +47,11 @@ const Sidebar = ({ image, toggled, handleToggleSidebar }) => {
             whiteSpace: "nowrap",
             display: "flex",
             justifyContent: "space-between",
+            cursor: "pointer",
           }}
           onClick={handleToggle}
         >
-          SideBar
+          {collapsed ? <FaBars /> : "Sidebar"}
         </div>
       </SidebarHeader>
 
@@ -59,7 +61,8 @@ const Sidebar = ({ image, toggled, handleToggleSidebar }) => {
             icon={<FaTachometerAlt />}
             suffix={<span className="badge red">New</span>}
           >
-            Dashboard
+            {" "}
+            <NavLink to="/admin">Dashboard</NavLink>
           </MenuItem>
           <MenuItem icon={<FaGem />}> Components</MenuItem>
         </Menu>
@@ -68,7 +71,9 @@ const Sidebar = ({ image, toggled, handleToggleSidebar }) => {
             suffix={<span className="badge yellow">Sub menu</span>}
             icon={<FaRegLaughWink />}
           >
-            <MenuItem> 1</MenuItem>
+            <MenuItem>
+              <NavLink to="add-product"> 1</NavLink>
+            </MenuItem>
             <MenuItem> 2</MenuItem>
             <MenuItem> 3</MenuItem>
           </SubMenu>
@@ -109,16 +114,14 @@ const Sidebar = ({ image, toggled, handleToggleSidebar }) => {
             className="sidebar-btn"
             rel="noopener noreferrer"
           >
-            <FaStore />
-            <span
-              style={{
-                whiteSpace: "nowrap",
-                textOverflow: "ellipsis",
-                overflow: "hidden",
-              }}
-            >
-              noithatnguyenly
-            </span>
+            {collapsed ? (
+              <FaStore />
+            ) : (
+              <>
+                <FaStore />
+                <span>Nguyễn Ly</span>
+              </>
+            )}
           </a>
         </div>
       </SidebarFooter>

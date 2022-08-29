@@ -13,19 +13,29 @@ import {
   MDBNavbarNav,
   MDBInputGroup,
 } from "mdb-react-ui-kit";
+import { useSelector } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
 import logo from "../../assets/img/logo.png";
 export const Header = () => {
+  const listProduct = useSelector((state) => state.ProductReducer.listProduct);
   const [showNavNoTogglerSecond, setShowNavNoTogglerSecond] = useState(false);
   const [clearToken, setClearToken] = useState(false);
+  const [valueSearch, setValueSearch] = useState("");
   const handleClearToken = () => {
     console.log("1");
     clearTokenFunc();
     setClearToken(!clearToken);
   };
+  useEffect(() => {
+    console.log(valueSearch.split(""));
+    listProduct.filter((item) => item.name == valueSearch);
+  }, [valueSearch]);
   const clearTokenFunc = () => {
     console.log("2");
     localStorage.clear();
+  };
+  const onChangeSearch = (e) => {
+    setValueSearch(e.target.value);
   };
   return (
     <>
@@ -95,6 +105,7 @@ export const Header = () => {
                 placeholder="Enter your text"
                 aria-label="Search"
                 type="Search"
+                onChange={onChangeSearch}
               />
               <MDBBtn outline>Search</MDBBtn>
             </MDBInputGroup>

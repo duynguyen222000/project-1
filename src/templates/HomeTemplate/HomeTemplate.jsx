@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./HomeTemplate.scss";
 import { Header } from "../../components/Header/Header";
 import { Outlet } from "react-router-dom";

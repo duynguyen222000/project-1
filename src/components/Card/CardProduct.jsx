@@ -9,8 +9,9 @@ import {
   MDBRipple,
 } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
-
-export const CardProduct = () => {
+import "./CardProduct.scss";
+export const CardProduct = ({ item }) => {
+  console.log(item);
   return (
     <MDBCard>
       <MDBRipple
@@ -19,7 +20,10 @@ export const CardProduct = () => {
         className="bg-image hover-overlay"
       >
         <MDBCardImage
-          src="https://mdbootstrap.com/img/new/standard/nature/111.webp"
+          src={
+            item?.img ||
+            "https://mdbootstrap.com/img/new/standard/nature/111.webp"
+          }
           fluid
           alt="..."
         />
@@ -31,15 +35,19 @@ export const CardProduct = () => {
         </a>
       </MDBRipple>
       <MDBCardBody>
-        <MDBCardTitle>Name product</MDBCardTitle>
-        <MDBCardText>Decription</MDBCardText>
-        <MDBCardText>Price:</MDBCardText>
+        <MDBCardTitle>{item?.name || "product's name is empty"}</MDBCardTitle>
+        <MDBCardText>{item?.description || "here is description"}</MDBCardText>
+        <MDBCardText>Price:{Number(item?.price).toLocaleString()}</MDBCardText>
         <div
           className="btn-group d-flex"
           role="group"
           aria-label="Basic example"
         >
-          <Link to="/" className="btn btn-primary w-100" href="#">
+          <Link
+            to={`/product/${item?.id}`}
+            className="btn btn-primary w-100"
+            href="#"
+          >
             View Detail
           </Link>
           <MDBBtn className="btn btn-info w-100" href="#">

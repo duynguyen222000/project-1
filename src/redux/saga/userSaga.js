@@ -21,4 +21,5 @@ function* loginSaga({ dataUser, navigate }) {
 function* followLoginSaga() {
   yield takeLatest(LOGIN_SAGA, loginSaga);
 }
+
 export { followLoginSaga };
