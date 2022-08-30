@@ -21,6 +21,7 @@ export const Header = () => {
   const [showNavNoTogglerSecond, setShowNavNoTogglerSecond] = useState(false);
   const [clearToken, setClearToken] = useState(false);
   const [valueSearch, setValueSearch] = useState("");
+  const [scrolled, setScrolled] = useState(false);
   const handleClearToken = () => {
     console.log("1");
     clearTokenFunc();
@@ -37,9 +38,30 @@ export const Header = () => {
   const onChangeSearch = (e) => {
     setValueSearch(e.target.value);
   };
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 100) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    });
+    return window.removeEventListener("scroll", () => {
+      if (window.scrollY > 100) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    });
+  }, []);
   return (
     <>
-      <MDBNavbar expand="lg" light bgColor="light">
+      <MDBNavbar
+        className={scrolled ? `scrolled sticky-top` : "sticky-top"}
+        expand="lg"
+        light
+        bgColor="light"
+      >
         <MDBContainer>
           <MDBNavbarBrand href="#">
             <Link to="home">
@@ -126,10 +148,11 @@ export const Header = () => {
               )}
             </div>{" "}
             <img
-              // style={{ width: "30px" }}
+              // style={{ width: "0px" }}
               src={localStorage.getItem("avatar")}
               alt=""
             />
+            <p> {localStorage.getItem("name")}</p>
           </MDBCollapse>
         </MDBContainer>
       </MDBNavbar>

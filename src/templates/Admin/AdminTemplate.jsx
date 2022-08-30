@@ -3,29 +3,38 @@ import "./AdminTemplate.scss";
 import { Navigate, Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 export const AdminTemplate = () => {
-  let [width, setWidth] = useState(0);
+  let [widthScreen, setWidth] = useState(false);
   useEffect(() => {
     window.addEventListener("resize", () => {
-      setWidth(window.innerWidth);
+      console.log(window.screen.width);
+      if (window.screen.width < 600) {
+        setWidth(false);
+      } else {
+        setWidth(true);
+      }
     });
-  }, [width]);
-  console.log(width);
+  }, []);
+  console.log(widthScreen);
   if (!localStorage.getItem("access_token")) {
     alert("Cần phải login");
     return <Navigate to="/login" replace={true} />;
   } else {
     return (
       <div id="admin">
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-2 col-lg-2 col-xs-6 col-md-6">
-              <Sidebar />
-            </div>
-            <div className="col-10 col-lg-10 col-xs-6 col-md-6">
-              <Outlet />
+        {widthScreen ? (
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-2 col-lg-2 col-xs-6 col-md-6">
+                <Sidebar />
+              </div>
+              <div className="col-10 col-lg-10 col-xs-6 col-md-6">
+                <Outlet />
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <h1>Trang chưa hỗ trợ trên thiết bị này</h1>
+        )}{" "}
       </div>
     );
   }

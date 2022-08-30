@@ -59,7 +59,7 @@ export const Product = () => {
         >
           {" "}
           <Tab eventKey="home" title="Tất cả sản phẩm">
-            <Row>{renderAll()}</Row>
+            <Row gap={3}>{renderAll()}</Row>
           </Tab>
           <Tab eventKey="all" title="Điện thoại">
             <Row>{renderMobile()}</Row>

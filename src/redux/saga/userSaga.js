@@ -11,6 +11,7 @@ function* loginSaga({ dataUser, navigate }) {
     if (STATUS_CODE.SUCCESS === status) {
       localStorage.setItem("access_token", data.content.accessToken);
       localStorage.setItem("avatar", data.content.avatar);
+      localStorage.setItem("name", data.content.name);
       console.log(data.content.avatar);
       navigate("/");
     }
