@@ -49,7 +49,7 @@ const ProductReducer = (state = initialState, { type, payload }) => {
     case DELETE_PRODUCT_CART:
       state.cart = JSON.parse(localStorage.getItem("cart"));
       console.log("statecart", state.cart);
-      let i = JSON.parse(localStorage.getItem("cart")).findIndex(
+      let i = JSON.parse(localStorage.getItem("cart"))?.findIndex(
         (item) => item.id === payload.id
       );
       if (i !== -1) {
