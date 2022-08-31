@@ -72,31 +72,8 @@ const Sidebar = ({ image, toggled, handleToggleSidebar }) => {
             icon={<FaRegLaughWink />}
           >
             <MenuItem>
-              <NavLink to="add-product"> 1</NavLink>
+              <NavLink to="add-product"> Add product</NavLink>
             </MenuItem>
-            <MenuItem> 2</MenuItem>
-            <MenuItem> 3</MenuItem>
-          </SubMenu>
-          <SubMenu
-            prefix={<span className="badge gray">SubMenu</span>}
-            icon={<FaHeart />}
-          >
-            <MenuItem> 1</MenuItem>
-            <MenuItem> 2</MenuItem>
-            <MenuItem> 3</MenuItem>
-          </SubMenu>
-          <SubMenu icon={<FaList />}>
-            <MenuItem> 1 </MenuItem>
-            <MenuItem> 2 </MenuItem>
-            <SubMenu title={`$ 3`}>
-              <MenuItem> 3.1 </MenuItem>
-              <MenuItem> 3.2 </MenuItem>
-              <SubMenu title={`$ 3.3`}>
-                <MenuItem>3.3.1 </MenuItem>
-                <MenuItem>3.3.2 </MenuItem>
-                <MenuItem>3.3.3 </MenuItem>
-              </SubMenu>
-            </SubMenu>
           </SubMenu>
         </Menu>
       </SidebarContent>

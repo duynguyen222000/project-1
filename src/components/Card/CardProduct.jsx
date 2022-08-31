@@ -10,8 +10,14 @@ import {
 } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
 import "./CardProduct.scss";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/actions/productAction";
 export const CardProduct = ({ item }) => {
   console.log(item);
+  const dispatch = useDispatch();
+  const handleAddCart = () => {
+    dispatch(addToCart(item));
+  };
   return (
     <MDBCard>
       <MDBRipple
@@ -50,7 +56,7 @@ export const CardProduct = ({ item }) => {
           >
             View Detail
           </Link>
-          <MDBBtn className="btn btn-info w-100" href="#">
+          <MDBBtn onClick={handleAddCart} className="btn btn-info w-100">
             Add to cart
           </MDBBtn>
         </div>

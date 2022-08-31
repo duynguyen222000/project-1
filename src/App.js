@@ -13,6 +13,7 @@ import { DashBoard } from "./pages/DashBoard/DashBoard";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductAction } from "./redux/actions/productAction";
+import { CartPage } from "./pages/Cart/CartPage";
 function App() {
   const dispatch = useDispatch();
   const getAllProductApi = () => {
@@ -31,6 +32,7 @@ function App() {
             <Route path="about" element={<About />} />
             <Route path="product" element={<Product />}></Route>
             <Route path="product/:productId" element={<Detail />} />
+            <Route path="cart" element={<CartPage />} />
             <Route path="*" element={<NotFound />} />
           </Route>
           <Route path="admin" element={<AdminTemplate />}>

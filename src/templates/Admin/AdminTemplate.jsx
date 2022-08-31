@@ -3,7 +3,7 @@ import "./AdminTemplate.scss";
 import { Navigate, Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 export const AdminTemplate = () => {
-  let [widthScreen, setWidth] = useState(false);
+  let [widthScreen, setWidth] = useState(true);
   useEffect(() => {
     window.addEventListener("resize", () => {
       console.log(window.screen.width);

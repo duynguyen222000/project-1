@@ -13,11 +13,12 @@ import {
   MDBNavbarNav,
   MDBInputGroup,
 } from "mdb-react-ui-kit";
+import { FaShoppingCart } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
 import logo from "../../assets/img/logo.png";
 export const Header = () => {
-  const listProduct = useSelector((state) => state.ProductReducer.listProduct);
+  const { listProduct, total } = useSelector((state) => state.ProductReducer);
   const [showNavNoTogglerSecond, setShowNavNoTogglerSecond] = useState(false);
   const [clearToken, setClearToken] = useState(false);
   const [valueSearch, setValueSearch] = useState("");
@@ -27,10 +28,15 @@ export const Header = () => {
     clearTokenFunc();
     setClearToken(!clearToken);
   };
+  let totalValue = localStorage.getItem("total");
+  useEffect(() => {
+    localStorage.getItem("total");
+  }, [localStorage.getItem("total")]);
   useEffect(() => {
     console.log(valueSearch.split(""));
     listProduct.filter((item) => item.name == valueSearch);
   }, [valueSearch]);
+
   const clearTokenFunc = () => {
     console.log("2");
     localStorage.clear();
@@ -68,6 +74,7 @@ export const Header = () => {
               <img src={logo} style={{ width: "100px" }} />
             </Link>
           </MDBNavbarBrand>
+
           <MDBNavbarToggler
             type="button"
             data-target="#navbarTogglerDemo02"
@@ -78,6 +85,7 @@ export const Header = () => {
           >
             <MDBIcon icon="bars" fas />
           </MDBNavbarToggler>
+
           <MDBCollapse navbar show={showNavNoTogglerSecond}>
             <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
               <MDBNavbarItem>
@@ -147,13 +155,21 @@ export const Header = () => {
                 </button>
               )}
             </div>{" "}
-            <img
+            {/* <img
               // style={{ width: "0px" }}
               src={localStorage.getItem("avatar")}
               alt=""
-            />
-            <p> {localStorage.getItem("name")}</p>
+            /> */}
           </MDBCollapse>
+          <Link to="cart">
+            {" "}
+            ({" "}
+            {localStorage.getItem("total")
+              ? localStorage.getItem("total")
+              : "0"}{" "}
+            )
+            <FaShoppingCart />
+          </Link>
         </MDBContainer>
       </MDBNavbar>
     </>
