@@ -32,9 +32,11 @@ const ProductReducer = (state = initialState, { type, payload }) => {
       console.log("test_update", state.productUpdate);
       return { ...state };
     case ADD_TO_CART:
-      state.cart = JSON.parse(localStorage.getItem("cart"));
-
-      let index = state.cart.findIndex((item) => item.id === payload.id);
+      let index = state.cart?.findIndex((item) => item.id === payload.id);
+      if (localStorage.getItem("total") > 0) {
+        console.log("true ");
+        state.cart = JSON.parse(localStorage.getItem("cart"));
+      }
       if (index !== -1) {
         state.cart[index].amount += 1;
       } else {

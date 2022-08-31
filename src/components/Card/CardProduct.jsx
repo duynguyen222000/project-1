@@ -8,15 +8,21 @@ import {
   MDBBtn,
   MDBRipple,
 } from "mdb-react-ui-kit";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./CardProduct.scss";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/actions/productAction";
 export const CardProduct = ({ item }) => {
+  const navigate = useNavigate();
   console.log(item);
   const dispatch = useDispatch();
   const handleAddCart = () => {
-    dispatch(addToCart(item));
+    if (!localStorage.getItem("access_token")) {
+      alert("vui lòng login");
+      navigate("/login");
+    } else {
+      dispatch(addToCart(item));
+    }
   };
   return (
     <MDBCard>
