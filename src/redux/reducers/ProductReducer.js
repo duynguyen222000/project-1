@@ -26,15 +26,12 @@ const ProductReducer = (state = initialState, { type, payload }) => {
       state.listProduct = payload;
       return { ...state };
     case "test_update":
-      console.log("payload", payload);
       const product = state.listProduct.filter((item) => item.id === payload);
       state.productUpdate = product[0];
-      console.log("test_update", state.productUpdate);
       return { ...state };
     case ADD_TO_CART:
       let index = state.cart?.findIndex((item) => item.id === payload.id);
       if (localStorage.getItem("total") > 0) {
-        console.log("true ");
         state.cart = JSON.parse(localStorage.getItem("cart"));
       }
       if (index !== -1) {
@@ -43,14 +40,12 @@ const ProductReducer = (state = initialState, { type, payload }) => {
         state.cart = [...state.cart, { ...payload, ["amount"]: 1 }];
       }
       state.total = state.cart.reduce((a, b) => (a += b.amount), 0);
-      console.log("total", state.total);
       localStorage.setItem("cart", JSON.stringify(state.cart));
       localStorage.setItem("total", state.total);
 
       return { ...state };
     case DELETE_PRODUCT_CART:
       state.cart = JSON.parse(localStorage.getItem("cart"));
-      console.log("statecart", state.cart);
       let i = JSON.parse(localStorage.getItem("cart"))?.findIndex(
         (item) => item.id === payload.id
       );

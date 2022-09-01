@@ -27,6 +27,7 @@ export const LoginFrom = () => {
   return (
     <div className="form-login d-flex justify-content-center align-items-center">
       <div className="container ">
+        <h1 className="text-center">USER LOGIN</h1>
         <div className="d-flex justify-content-center align-items-center ">
           <form style={{ width: "500px" }}>
             <div className="form-outline mb-4">
@@ -38,7 +39,7 @@ export const LoginFrom = () => {
                 className="form-control"
               />
               <label className="form-label" htmlFor="form1Example1">
-                Email address
+                {valueForm.email !== "" ? "" : "Email address"}
               </label>
             </div>
             {/* Password input */}
@@ -51,7 +52,7 @@ export const LoginFrom = () => {
                 className="form-control"
               />
               <label className="form-label" htmlFor="form1Example2">
-                Password
+                {valueForm.password !== "" ? "" : "Password"}
               </label>
             </div>
             {/* 2 column grid layout for inline styling */}
@@ -64,7 +65,7 @@ export const LoginFrom = () => {
                     type="checkbox"
                     defaultValue
                     id="form1Example3"
-                    defaultChecked
+                    defaultChecked={false}
                   />
                   <label className="form-check-label" htmlFor="form1Example3">
                     {" "}

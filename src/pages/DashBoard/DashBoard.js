@@ -5,8 +5,17 @@ import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteProductAction } from "../../redux/actions/productAction";
+import _ from "lodash";
 export const DashBoard = () => {
-  const { productUpdate } = useSelector((state) => state.ProductReducer);
+  // modal
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  // end modal
+  const { productUpdate, listProduct } = useSelector(
+    (state) => state.ProductReducer
+  );
   let [test, setTest] = useState({
     id: "",
     name: "",
@@ -16,12 +25,9 @@ export const DashBoard = () => {
     type: "",
   });
   const dispatch = useDispatch();
-  const { listProduct } = useSelector((state) => state.ProductReducer);
-  console.log("productUpdate", productUpdate);
   useEffect(() => {
     setTest(productUpdate);
   }, [productUpdate]);
-  console.log("test", test);
   const handleChange = (e) => {
     let { name, value } = e.target;
     setTest({ ...test, [name]: value });
@@ -33,6 +39,12 @@ export const DashBoard = () => {
       data: test,
     });
   };
+
+  // console.log(newArr);
+  // const arrSort = () => {
+  //   let arrSortList = _.sortBy(listProduct, "name");
+  //   setNewArr(arrSortList);
+  // };
   const renderList = () => {
     return listProduct
       .filter((item) => item.id !== "")
@@ -59,6 +71,7 @@ export const DashBoard = () => {
                 </button>
                 <button
                   onClick={() => {
+                    handleShow();
                     dispatch({
                       type: "test_update",
                       payload: item.id,
@@ -75,11 +88,11 @@ export const DashBoard = () => {
       });
   };
   return (
-    <div>
+    <>
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>
-            <th>#</th>
+            <th>ID</th>
             <th>Product's Name</th>
             <th> Price</th>
             <th>Img</th>
@@ -90,54 +103,93 @@ export const DashBoard = () => {
         <tbody>{renderList()}</tbody>
       </Table>
 
-      <form action="">
-        <input
-          onChange={handleChange}
-          disabled
-          placeholder="id"
-          name="id"
-          type="text"
-          value={test.id}
-        />
-        <input
-          onChange={handleChange}
-          name="name"
-          placeholder="name"
-          type="text"
-          value={test.name}
-        />
-        <input
-          onChange={handleChange}
-          name="price"
-          placeholder="price"
-          type="text"
-          value={test.price}
-        />
-        <input
-          onChange={handleChange}
-          name="description"
-          placeholder="desc"
-          type="text"
-          value={test.description}
-        />
-        <input
-          onChange={handleChange}
-          name="img"
-          placeholder="img"
-          type="text"
-          value={test.img}
-        />
-        <input
-          onChange={handleChange}
-          name="type"
-          placeholder="type"
-          type="text"
-          value={test.type}
-        />
-        <button type="button" onClick={handleSubmit}>
-          submit
-        </button>
-      </form>
-    </div>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Update product</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form action="">
+            <label htmlFor="">ID</label>
+            <input
+              onChange={handleChange}
+              disabled
+              placeholder="id"
+              name="id"
+              type="text"
+              value={test.id}
+              className="col-12"
+            />
+            <label htmlFor="">Name</label>
+
+            <input
+              onChange={handleChange}
+              name="name"
+              placeholder="name"
+              type="text"
+              className="col-12"
+              value={test.name}
+            />
+            <label htmlFor="">Price</label>
+
+            <input
+              onChange={handleChange}
+              name="price"
+              placeholder="price"
+              type="text"
+              className="col-12"
+              value={test.price}
+            />
+            <label htmlFor="">Description</label>
+
+            <textarea
+              onChange={handleChange}
+              name="description"
+              placeholder="desc"
+              className="col-12"
+              rows="4"
+              cols="50"
+              value={test.description}
+            />
+            <label htmlFor="">Link img</label>
+
+            <input
+              onChange={handleChange}
+              name="img"
+              placeholder="img"
+              className="col-12"
+              type="text"
+              value={test.img}
+            />
+            <label htmlFor="">Type</label>
+
+            <input
+              onChange={handleChange}
+              name="type"
+              placeholder="type"
+              className="col-12"
+              type="text"
+              value={test.type}
+            />
+            {/* <button type="button" onClick={handleSubmit}>
+              submit
+            </button> */}
+          </form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button
+            variant="primary"
+            onClick={() => {
+              handleClose();
+              handleSubmit();
+            }}
+          >
+            Confirm Update
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 };

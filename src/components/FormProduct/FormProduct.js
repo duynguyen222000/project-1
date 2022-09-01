@@ -25,8 +25,8 @@ export const FormProduct = () => {
   return (
     <>
       {" "}
-      <Form style={{ maxWidth: "50%" }}>
-        <p>Form Add Product</p>
+      <Form style={{ maxWidth: "100%" }}>
+        <h1>Form Add Product</h1>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>ID</Form.Label>
           <Form.Control
@@ -66,9 +66,10 @@ export const FormProduct = () => {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>description</Form.Label>
           <Form.Control
+            as="textarea"
+            rows={5}
             name="description"
             onChange={handleChangeValue}
-            type="text"
             placeholder="Enter description"
           />
         </Form.Group>

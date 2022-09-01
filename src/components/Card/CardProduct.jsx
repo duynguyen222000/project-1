@@ -14,7 +14,6 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/actions/productAction";
 export const CardProduct = ({ item }) => {
   const navigate = useNavigate();
-  console.log(item);
   const dispatch = useDispatch();
   const handleAddCart = () => {
     if (!localStorage.getItem("access_token")) {
@@ -49,7 +48,9 @@ export const CardProduct = ({ item }) => {
       <MDBCardBody>
         <MDBCardTitle>{item?.name || "product's name is empty"}</MDBCardTitle>
         <MDBCardText>{item?.description || "here is description"}</MDBCardText>
-        <MDBCardText>Price:{Number(item?.price).toLocaleString()}</MDBCardText>
+        <MDBCardText>
+          Price:{Number(item?.price).toLocaleString()} VNĐ
+        </MDBCardText>
         <div
           className="btn-group d-flex"
           role="group"

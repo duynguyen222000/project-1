@@ -29,11 +29,9 @@ function* followAddProductSaga() {
 }
 // delete product saga
 function* deleteProductSaga({ payload }) {
-  console.log(payload);
   const { data, status } = yield call(() =>
     productServices.deleteProduct(payload)
   );
-  console.log(data);
   yield put({
     type: GET_ALL_PRODUCT_API,
   });
@@ -46,7 +44,6 @@ function* updateProductSaga(payload) {
   const { data, status } = yield call(() => {
     return productServices.updateProduct(payload.id, payload.data);
   });
-  console.log("data", data);
   yield put({
     type: GET_ALL_PRODUCT_API,
   });

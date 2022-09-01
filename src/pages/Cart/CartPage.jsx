@@ -12,7 +12,7 @@ export const CartPage = () => {
     if (JSON.parse(localStorage.getItem("cart"))) {
       return JSON.parse(localStorage.getItem("cart")).map((item, index) => {
         return (
-          <tr>
+          <tr key={index}>
             <td>{item.id}</td>
             <td>{item.name}</td>
             <td>{item.amount}</td>
@@ -36,8 +36,6 @@ export const CartPage = () => {
   };
   const total = () => {
     return JSON.parse(localStorage.getItem("cart"))?.reduce((a, b) => {
-      console.log("a", a);
-      console.log("b", b);
       return a + Number(b.amount) * b.price;
     }, 0);
   };

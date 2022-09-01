@@ -28,20 +28,50 @@ export const Header = () => {
     clearTokenFunc();
     setClearToken(!clearToken);
   };
-  let totalValue = localStorage.getItem("total");
-  useEffect(() => {
-    localStorage.getItem("total");
-  }, [localStorage.getItem("total")]);
-  useEffect(() => {
-    console.log(valueSearch.split(""));
-    listProduct.filter((item) => item.name == valueSearch);
-  }, [valueSearch]);
+  const [listSearch, setListSearch] = useState([]);
 
+  useEffect(() => {
+    let searchList = listProduct.filter((item) => {
+      return (
+        item.name?.toLowerCase().includes(valueSearch?.toLowerCase()) &&
+        item.id !== ""
+      );
+    });
+    if (valueSearch === "") {
+      setListSearch([]);
+    } else {
+      setListSearch(searchList);
+    }
+  }, [valueSearch]);
+  const renderListSearch = () => {
+    return listSearch.map((item, index) => {
+      return (
+        <Link
+          to={`/product/${item.id}`}
+          className="search-item"
+          style={{ padding: "6px 12px" }}
+          key={index}
+        >
+          <img style={{ width: "50px" }} src={item.img} alt="" />
+          <div className="result-content">
+            <span>{item.name}</span>
+            <span>{Number(item.price).toLocaleString()} VND</span>
+          </div>
+          <Link
+            to={`/product/${item.id}`}
+            className="btn btn-primary view-detail"
+          >
+            Detail
+          </Link>
+        </Link>
+      );
+    });
+  };
   const clearTokenFunc = () => {
-    console.log("2");
     localStorage.clear();
   };
   const onChangeSearch = (e) => {
+    console.log(e.target.value);
     setValueSearch(e.target.value);
   };
   useEffect(() => {
@@ -90,7 +120,7 @@ export const Header = () => {
             <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
               <MDBNavbarItem>
                 <NavLink
-                  active
+                  active="true"
                   aria-current="page"
                   className="nav-link"
                   to="home"
@@ -100,7 +130,7 @@ export const Header = () => {
               </MDBNavbarItem>
               <MDBNavbarItem>
                 <NavLink
-                  active
+                  active="true"
                   aria-current="page"
                   className="nav-link"
                   to="product"
@@ -110,7 +140,7 @@ export const Header = () => {
               </MDBNavbarItem>
               <MDBNavbarItem>
                 <NavLink
-                  active
+                  active="true"
                   aria-current="page"
                   className="nav-link"
                   to="about"
@@ -129,7 +159,10 @@ export const Header = () => {
                 </MDBNavbarLink>
               </MDBNavbarItem>
             </MDBNavbarNav>
-            <MDBInputGroup tag="form" className="d-flex  mb-3">
+            <MDBInputGroup
+              tag="form"
+              className="d-flex  mb-3 form-search-header"
+            >
               <input
                 className="form-control"
                 placeholder="Enter your text"
@@ -138,6 +171,7 @@ export const Header = () => {
                 onChange={onChangeSearch}
               />
               <MDBBtn outline>Search</MDBBtn>
+              <div className="result-search">{renderListSearch()}</div>
             </MDBInputGroup>
             <div className="btn-group ms-2 mb-3">
               {!localStorage.getItem("access_token") ? (

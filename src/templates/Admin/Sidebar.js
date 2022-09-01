@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ProSidebar,
   Menu,
@@ -22,7 +22,8 @@ import "./Sidebar.scss";
 import { NavLink } from "react-router-dom";
 
 const Sidebar = ({ image, toggled, handleToggleSidebar }) => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
+
   const handleToggle = () => {
     setCollapsed(!collapsed);
   };
